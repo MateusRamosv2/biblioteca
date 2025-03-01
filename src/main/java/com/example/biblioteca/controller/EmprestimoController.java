@@ -1,11 +1,10 @@
 package com.example.biblioteca.controller;
-
 import com.example.biblioteca.domain.Emprestimo;
+
 import com.example.biblioteca.dto.EmprestimoDTO;
 import com.example.biblioteca.service.EmprestimoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -24,15 +23,10 @@ public class EmprestimoController {
     }
 
     @PostMapping
-    public ResponseEntity<EmprestimoDTO> criarEmprestimo(@RequestBody Emprestimo emprestimo) {
-        Emprestimo emprestimoSalvo = emprestimoService.realizarEmprestimo(emprestimo);
-        return ResponseEntity.ok(new EmprestimoDTO(emprestimoSalvo));
+    public ResponseEntity<EmprestimoDTO> criarEmprestimo(@RequestBody EmprestimoDTO emprestimoDTO) {
+        EmprestimoDTO emprestimoSalvo = emprestimoService.realizarEmprestimo(emprestimoDTO);
+        return ResponseEntity.ok(emprestimoSalvo);
     }
-
-
-
-
-
 
     @PutMapping("/{id}/devolucao")
     public ResponseEntity<EmprestimoDTO> registrarDevolucao(@PathVariable Long id) {
@@ -41,5 +35,29 @@ public class EmprestimoController {
     }
 
 
+    /*Este DeleteMapping foi implementado depois de eu registrar as devoluções de
+    livro, ou seja, devolução está funcionando. O problema agora está em deletar
+    emprestimo. Depois eu tenho que testar deletar livro, usuario também.
+     */
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarEmprestimo(@PathVariable Long id) {
+        emprestimoService.deletarEmprestimo(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
+
+
+
+    /*
+     * Código antigo:
+     * - O endpoint `/api/emprestimos` recebia um objeto `Emprestimo`, mas o JSON não correspondia ao esperado.
+     * - Isso gerava um erro 500 ao tentar criar um novo empréstimo.
+     *
+     * Alteração:
+     * - Agora recebe um `EmprestimoDTO` no `POST`, que contém apenas os IDs do usuário e do livro.
+     * - A lógica de conversão foi movida para o `EmprestimoService`.
+     */
 }

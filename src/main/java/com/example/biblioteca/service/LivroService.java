@@ -4,6 +4,7 @@ import com.example.biblioteca.domain.Livro;
 import com.example.biblioteca.dto.LivroDTO;
 import com.example.biblioteca.repository.LivroRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public class LivroService {
 
     public List<LivroDTO> listarTodos() {
         return livroRepository.findAll().stream()
-                .map(LivroDTO::new) // Converte cada entidade Livro em DTO
+                .map(LivroDTO::new)
                 .collect(Collectors.toList());
     }
 
@@ -40,10 +41,14 @@ public class LivroService {
         livro.setTitulo(dtoAtualizado.getTitulo());
         livro.setAutor(dtoAtualizado.getAutor());
         livro.setDisponivel(dtoAtualizado.isDisponivel());
+
         return new LivroDTO(livroRepository.save(livro));
     }
 
     public void deletar(Long id) {
+        if (!livroRepository.existsById(id)) {
+            throw new RuntimeException("Livro não encontrado com id: " + id);
+        }
         livroRepository.deleteById(id);
     }
 }

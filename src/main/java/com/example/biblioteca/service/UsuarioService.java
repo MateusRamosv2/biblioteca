@@ -6,6 +6,7 @@ import com.example.biblioteca.dto.UsuarioDTO;
 import com.example.biblioteca.repository.EmprestimoRepository;
 import com.example.biblioteca.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

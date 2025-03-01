@@ -1,6 +1,7 @@
 package com.example.biblioteca.domain;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
@@ -23,7 +24,8 @@ public class Emprestimo {
 
     private LocalDate dataDevolucao;
 
-    public Emprestimo() {}
+    public Emprestimo() {
+    }
 
     public Emprestimo(Long id, Usuario usuario, Livro livro, LocalDate dataEmprestimo, LocalDate dataDevolucao) {
         this.id = id;
@@ -33,18 +35,43 @@ public class Emprestimo {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Usuario getUsuario() { return usuario; }
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Livro getLivro() { return livro; }
-    public void setLivro(Livro livro) { this.livro = livro; }
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-    public LocalDate getDataEmprestimo() { return dataEmprestimo; }
-    public void setDataEmprestimo(LocalDate dataEmprestimo) { this.dataEmprestimo = dataEmprestimo; }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 
-    public LocalDate getDataDevolucao() { return dataDevolucao; }
-    public void setDataDevolucao(LocalDate dataDevolucao) { this.dataDevolucao = dataDevolucao; }
+    public Livro getLivro() {
+        return livro;
+    }
+
+    public void setLivro(Livro livro) {
+        this.livro = livro;
+    }
+
+    public LocalDate getDataEmprestimo() {
+        return dataEmprestimo;
+    }
+
+    public void setDataEmprestimo(LocalDate dataEmprestimo) {
+        this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public LocalDate getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(LocalDate dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
+    }
 }

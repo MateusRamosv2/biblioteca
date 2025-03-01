@@ -9,7 +9,8 @@ public class LivroDTO {
     private String autor;
     private boolean disponivel;
 
-    public LivroDTO() {}
+    public LivroDTO() {
+    }
 
     public LivroDTO(Livro livro) {
         this.id = livro.getId();
@@ -18,8 +19,19 @@ public class LivroDTO {
         this.disponivel = livro.isDisponivel();
     }
 
-    public Long getId() { return id; }
-    public String getTitulo() { return titulo; }
-    public String getAutor() { return autor; }
-    public boolean isDisponivel() { return disponivel; }
+    public Long getId() {
+        return id;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
 }

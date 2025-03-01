@@ -4,7 +4,9 @@ import com.example.biblioteca.dto.LivroDTO;
 import com.example.biblioteca.service.LivroService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/livros")
@@ -25,4 +27,26 @@ public class LivroController {
     public ResponseEntity<List<LivroDTO>> listarLivros() {
         return ResponseEntity.ok(livroService.listarTodos());
     }
+
+    @GetMapping("/{id}") // ✅ Adicionando método para buscar livro por ID
+    public ResponseEntity<LivroDTO> buscarLivroPorId(@PathVariable Long id) {
+        Optional<LivroDTO> livroDTO = livroService.buscarPorId(id);
+        return livroDTO.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<LivroDTO> atualizarLivro(@PathVariable Long id, @RequestBody LivroDTO livroDTO) {
+        return ResponseEntity.ok(livroService.atualizar(id, livroDTO));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarLivro(@PathVariable Long id) {
+        livroService.deletar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    /*
+    // Código antigo - Não havia um método para buscar livro por ID
+    */
 }
