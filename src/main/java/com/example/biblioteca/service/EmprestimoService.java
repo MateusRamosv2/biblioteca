@@ -4,10 +4,12 @@ import com.example.biblioteca.domain.Emprestimo;
 import com.example.biblioteca.domain.Livro;
 import com.example.biblioteca.domain.Usuario;
 import com.example.biblioteca.dto.EmprestimoDTO;
+import com.example.biblioteca.exception.EmprestimoNotFoundException;
 import com.example.biblioteca.repository.EmprestimoRepository;
 import com.example.biblioteca.repository.LivroRepository;
 import com.example.biblioteca.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,15 +51,6 @@ public class EmprestimoService {
         return new EmprestimoDTO(emprestimo);
     }
 
-    /*
-     * Código antigo:
-     * - O método `realizarEmprestimo` recebia um objeto `Emprestimo` diretamente no corpo da requisição.
-     * - Isso causava erro ao tentar converter `usuarioId` e `livroId`.
-     *
-     * Alteração:
-     * - Agora recebe um `EmprestimoDTO` contendo apenas os IDs.
-     * - Busca os objetos `Usuario` e `Livro` pelo repositório antes de criar o empréstimo.
-     */
 
     public List<EmprestimoDTO> listarTodos() {
         return emprestimoRepository.findAll().stream()
@@ -88,9 +81,16 @@ public class EmprestimoService {
      */
 
 
-    public void deletarEmprestimo(Long id) {
+    /*public void deletarEmprestimo(Long id) {
         if (!emprestimoRepository.existsById(id)) {
             throw new RuntimeException("Empréstimo não encontrado");
+        }
+        emprestimoRepository.deleteById(id);
+    } */
+
+    public void deletarEmprestimo(Long id) {
+        if (!emprestimoRepository.existsById(id)) {
+            throw new EmprestimoNotFoundException(id);
         }
         emprestimoRepository.deleteById(id);
     }

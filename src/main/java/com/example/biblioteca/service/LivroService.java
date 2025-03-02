@@ -2,6 +2,7 @@ package com.example.biblioteca.service;
 
 import com.example.biblioteca.domain.Livro;
 import com.example.biblioteca.dto.LivroDTO;
+import com.example.biblioteca.exception.LivroNotFoundException;
 import com.example.biblioteca.repository.LivroRepository;
 import org.springframework.stereotype.Service;
 
@@ -45,9 +46,17 @@ public class LivroService {
         return new LivroDTO(livroRepository.save(livro));
     }
 
-    public void deletar(Long id) {
+    /*public void deletar(Long id) {
         if (!livroRepository.existsById(id)) {
             throw new RuntimeException("Livro não encontrado com id: " + id);
+        }
+        livroRepository.deleteById(id);
+    } */
+
+
+    public void deletar(Long id) {
+        if (!livroRepository.existsById(id)) {
+            throw new LivroNotFoundException(id);
         }
         livroRepository.deleteById(id);
     }

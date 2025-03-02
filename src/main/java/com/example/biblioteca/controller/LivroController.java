@@ -28,7 +28,7 @@ public class LivroController {
         return ResponseEntity.ok(livroService.listarTodos());
     }
 
-    @GetMapping("/{id}") // ✅ Adicionando método para buscar livro por ID
+    @GetMapping("/{id}")
     public ResponseEntity<LivroDTO> buscarLivroPorId(@PathVariable Long id) {
         Optional<LivroDTO> livroDTO = livroService.buscarPorId(id);
         return livroDTO.map(ResponseEntity::ok)
@@ -46,7 +46,5 @@ public class LivroController {
         return ResponseEntity.noContent().build();
     }
 
-    /*
-    // Código antigo - Não havia um método para buscar livro por ID
-    */
+
 }

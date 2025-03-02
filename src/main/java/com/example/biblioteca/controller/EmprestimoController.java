@@ -1,10 +1,11 @@
 package com.example.biblioteca.controller;
-import com.example.biblioteca.domain.Emprestimo;
 
+import com.example.biblioteca.domain.Emprestimo;
 import com.example.biblioteca.dto.EmprestimoDTO;
 import com.example.biblioteca.service.EmprestimoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -47,17 +48,4 @@ public class EmprestimoController {
     }
 
 
-
-
-
-
-    /*
-     * Código antigo:
-     * - O endpoint `/api/emprestimos` recebia um objeto `Emprestimo`, mas o JSON não correspondia ao esperado.
-     * - Isso gerava um erro 500 ao tentar criar um novo empréstimo.
-     *
-     * Alteração:
-     * - Agora recebe um `EmprestimoDTO` no `POST`, que contém apenas os IDs do usuário e do livro.
-     * - A lógica de conversão foi movida para o `EmprestimoService`.
-     */
 }
