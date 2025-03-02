@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+/*import java.util.Optional; */
 
 @RestController
 @RequestMapping("/api/livros")
@@ -28,12 +28,23 @@ public class LivroController {
         return ResponseEntity.ok(livroService.listarTodos());
     }
 
+
     @GetMapping("/{id}")
+    public ResponseEntity<LivroDTO> buscarLivroPorId(@PathVariable Long id) {
+        LivroDTO livroDTO = livroService.buscarPorId(id);
+        return ResponseEntity.ok(livroDTO);
+    }
+
+
+
+
+
+    /*@GetMapping("/{id}")
     public ResponseEntity<LivroDTO> buscarLivroPorId(@PathVariable Long id) {
         Optional<LivroDTO> livroDTO = livroService.buscarPorId(id);
         return livroDTO.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
-    }
+    } */
 
     @PutMapping("/{id}")
     public ResponseEntity<LivroDTO> atualizarLivro(@PathVariable Long id, @RequestBody LivroDTO livroDTO) {

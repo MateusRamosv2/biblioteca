@@ -20,12 +20,24 @@ public class UsuarioController {
         return ResponseEntity.status(201).body(usuarioService.salvar(usuarioDTO));
     }
 
+
     @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> buscarUsuario(@PathVariable Long id) {
+        UsuarioDTO usuarioDTO = usuarioService.buscarPorId(id);
+        return ResponseEntity.ok(usuarioDTO);
+    }
+
+
+
+
+
+
+    /*@GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> buscarUsuario(@PathVariable Long id) {
         return usuarioService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
-    }
+    }*/
 
 
     @DeleteMapping("/{id}")

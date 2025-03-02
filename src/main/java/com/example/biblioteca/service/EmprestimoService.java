@@ -75,10 +75,7 @@ public class EmprestimoService {
         return emprestimoRepository.save(emprestimo);
     }
 
-    /*Este DeleteMapping foi implementado depois de eu registrar as devoluções de
-    livro, ou seja, devolução está funcionando. O problema agora está em deletar
-    emprestimo. Depois eu tenho que testar deletar livro, usuario também.
-     */
+
 
 
     /*public void deletarEmprestimo(Long id) {
@@ -93,6 +90,14 @@ public class EmprestimoService {
             throw new EmprestimoNotFoundException(id);
         }
         emprestimoRepository.deleteById(id);
+    }
+
+
+    public EmprestimoDTO buscarPorId(Long id) {
+        Emprestimo emprestimo = emprestimoRepository.findById(id)
+                .orElseThrow(() -> new EmprestimoNotFoundException(id));
+
+        return new EmprestimoDTO(emprestimo);
     }
 
 

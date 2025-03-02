@@ -6,7 +6,7 @@ import com.example.biblioteca.service.EmprestimoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+/*import java.util.List;*/
 
 @RestController
 @RequestMapping("/api/emprestimos")
@@ -18,10 +18,17 @@ public class EmprestimoController {
         this.emprestimoService = emprestimoService;
     }
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<List<EmprestimoDTO>> listarEmprestimos() {
         return ResponseEntity.ok(emprestimoService.listarTodos());
+    }*/
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EmprestimoDTO> buscarEmprestimoPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(emprestimoService.buscarPorId(id));
     }
+
 
     @PostMapping
     public ResponseEntity<EmprestimoDTO> criarEmprestimo(@RequestBody EmprestimoDTO emprestimoDTO) {
@@ -35,11 +42,6 @@ public class EmprestimoController {
         return ResponseEntity.ok(new EmprestimoDTO(emprestimo));
     }
 
-
-    /*Este DeleteMapping foi implementado depois de eu registrar as devoluções de
-    livro, ou seja, devolução está funcionando. O problema agora está em deletar
-    emprestimo. Depois eu tenho que testar deletar livro, usuario também.
-     */
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarEmprestimo(@PathVariable Long id) {
