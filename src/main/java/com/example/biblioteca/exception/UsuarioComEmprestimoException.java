@@ -7,8 +7,3 @@ public class UsuarioComEmprestimoException extends BibliotecaException {
 }
 
 
-
-
-
-/*Isso aqui é um exceção pra avisar  Exceção para empréstimo pendente ao tentar excluir usuário*/
-

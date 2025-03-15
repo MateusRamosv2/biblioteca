@@ -5,6 +5,3 @@ public class LivroNotFoundException extends BibliotecaException {
         super("Livro com ID " + id + " não encontrado.");
     }
 }
-
-
-/*Isso aqui é um exceção pra avisar quando um livro não for econtrado*/

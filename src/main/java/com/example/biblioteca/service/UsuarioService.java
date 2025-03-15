@@ -8,7 +8,6 @@ import com.example.biblioteca.exception.UsuarioNotFoundException;
 import com.example.biblioteca.repository.EmprestimoRepository;
 import com.example.biblioteca.repository.UsuarioRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,22 +34,12 @@ public class UsuarioService {
                 .collect(Collectors.toList());
     }
 
-
     public UsuarioDTO buscarPorId(Long id) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
         return new UsuarioDTO(usuario);
     }
 
-
-
-
-
-
-    /*public Optional<UsuarioDTO> buscarPorId(Long id) {
-        return usuarioRepository.findById(id)
-                .map(UsuarioDTO::new);
-    }*/
 
     public UsuarioDTO atualizar(Long id, UsuarioDTO dtoAtualizado) {
         Usuario usuario = usuarioRepository.findById(id)

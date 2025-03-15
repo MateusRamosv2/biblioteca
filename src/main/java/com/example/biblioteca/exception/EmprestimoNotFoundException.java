@@ -5,7 +5,3 @@ public class EmprestimoNotFoundException extends BibliotecaException {
         super("Empréstimo com ID " + id + " não encontrado.");
     }
 }
-
-
-
-/*Isso aqui é um exceção pra avisar  quando um empréstimo não for encontrado*/

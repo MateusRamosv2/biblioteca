@@ -37,13 +37,6 @@ public class LivroService {
         return new LivroDTO(livro);
     }
 
-
-
-
-    /*public Optional<LivroDTO> buscarPorId(Long id) {
-        return livroRepository.findById(id).map(LivroDTO::new);
-    } */
-
     public LivroDTO atualizar(Long id, LivroDTO dtoAtualizado) {
         Livro livro = livroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado com id: " + id));
@@ -54,14 +47,6 @@ public class LivroService {
 
         return new LivroDTO(livroRepository.save(livro));
     }
-
-    /*public void deletar(Long id) {
-        if (!livroRepository.existsById(id)) {
-            throw new RuntimeException("Livro não encontrado com id: " + id);
-        }
-        livroRepository.deleteById(id);
-    } */
-
 
     public void deletar(Long id) {
         if (!livroRepository.existsById(id)) {
