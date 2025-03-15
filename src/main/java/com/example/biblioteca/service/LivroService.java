@@ -19,7 +19,7 @@ public class LivroService {
     }
 
     public LivroDTO salvar(LivroDTO dto) {
-        Livro livro = new Livro(dto.getId(), dto.getTitulo(), dto.getAutor(), dto.isDisponivel());
+        Livro livro = new Livro(dto.id(), dto.titulo(), dto.autor(), dto.disponivel());
         Livro livroSalvo = livroRepository.save(livro);
         return new LivroDTO(livroSalvo);
     }
@@ -29,7 +29,6 @@ public class LivroService {
                 .map(LivroDTO::new)
                 .collect(Collectors.toList());
     }
-
 
     public LivroDTO buscarPorId(Long id) {
         Livro livro = livroRepository.findById(id)
@@ -41,9 +40,9 @@ public class LivroService {
         Livro livro = livroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado com id: " + id));
 
-        livro.setTitulo(dtoAtualizado.getTitulo());
-        livro.setAutor(dtoAtualizado.getAutor());
-        livro.setDisponivel(dtoAtualizado.isDisponivel());
+        livro.setTitulo(dtoAtualizado.titulo());
+        livro.setAutor(dtoAtualizado.autor());
+        livro.setDisponivel(dtoAtualizado.disponivel());
 
         return new LivroDTO(livroRepository.save(livro));
     }

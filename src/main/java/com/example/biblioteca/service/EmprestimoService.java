@@ -28,11 +28,11 @@ public class EmprestimoService {
     }
 
     public EmprestimoDTO realizarEmprestimo(EmprestimoDTO emprestimoDTO) {
-        Usuario usuario = usuarioRepository.findById(emprestimoDTO.getUsuarioId())
-                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com id: " + emprestimoDTO.getUsuarioId()));
+        Usuario usuario = usuarioRepository.findById(emprestimoDTO.usuarioId())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado com id: " + emprestimoDTO.usuarioId()));
 
-        Livro livro = livroRepository.findById(emprestimoDTO.getLivroId())
-                .orElseThrow(() -> new RuntimeException("Livro não encontrado com id: " + emprestimoDTO.getLivroId()));
+        Livro livro = livroRepository.findById(emprestimoDTO.livroId())
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado com id: " + emprestimoDTO.livroId()));
 
         if (!livro.isDisponivel()) {
             throw new RuntimeException("O livro não está disponível para empréstimo.");
@@ -44,13 +44,12 @@ public class EmprestimoService {
         Emprestimo emprestimo = new Emprestimo();
         emprestimo.setUsuario(usuario);
         emprestimo.setLivro(livro);
-        emprestimo.setDataEmprestimo(emprestimoDTO.getDataEmprestimo());
+        emprestimo.setDataEmprestimo(emprestimoDTO.dataEmprestimo());
 
         emprestimo = emprestimoRepository.save(emprestimo);
 
         return new EmprestimoDTO(emprestimo);
     }
-
 
     public List<EmprestimoDTO> listarTodos() {
         return emprestimoRepository.findAll().stream()
@@ -82,13 +81,10 @@ public class EmprestimoService {
         emprestimoRepository.deleteById(id);
     }
 
-
     public EmprestimoDTO buscarPorId(Long id) {
         Emprestimo emprestimo = emprestimoRepository.findById(id)
                 .orElseThrow(() -> new EmprestimoNotFoundException(id));
 
         return new EmprestimoDTO(emprestimo);
     }
-
-
 }

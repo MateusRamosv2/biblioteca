@@ -23,7 +23,7 @@ public class UsuarioService {
     }
 
     public UsuarioDTO salvar(UsuarioDTO dto) {
-        Usuario usuario = new Usuario(null, dto.getNome(), dto.getEmail());
+        Usuario usuario = new Usuario(null, dto.nome(), dto.email());
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
         return new UsuarioDTO(usuarioSalvo);
     }
@@ -40,13 +40,12 @@ public class UsuarioService {
         return new UsuarioDTO(usuario);
     }
 
-
     public UsuarioDTO atualizar(Long id, UsuarioDTO dtoAtualizado) {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
 
-        usuario.setNome(dtoAtualizado.getNome());
-        usuario.setEmail(dtoAtualizado.getEmail());
+        usuario.setNome(dtoAtualizado.nome());
+        usuario.setEmail(dtoAtualizado.email());
         return new UsuarioDTO(usuarioRepository.save(usuario));
     }
 
@@ -61,8 +60,4 @@ public class UsuarioService {
 
         usuarioRepository.deleteById(id);
     }
-
 }
-
-
-
