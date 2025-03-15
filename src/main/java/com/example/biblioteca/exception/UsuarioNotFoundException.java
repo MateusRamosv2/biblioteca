@@ -5,6 +5,3 @@ public class UsuarioNotFoundException extends BibliotecaException {
         super("Usuário com ID " + id + " não encontrado.");
     }
 }
-
-
-/*Isso aqui é um exceção pra avisar quando um usuário não aparecer*/

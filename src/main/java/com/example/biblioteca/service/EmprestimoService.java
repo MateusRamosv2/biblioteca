@@ -75,16 +75,6 @@ public class EmprestimoService {
         return emprestimoRepository.save(emprestimo);
     }
 
-
-
-
-    /*public void deletarEmprestimo(Long id) {
-        if (!emprestimoRepository.existsById(id)) {
-            throw new RuntimeException("Empréstimo não encontrado");
-        }
-        emprestimoRepository.deleteById(id);
-    } */
-
     public void deletarEmprestimo(Long id) {
         if (!emprestimoRepository.existsById(id)) {
             throw new EmprestimoNotFoundException(id);

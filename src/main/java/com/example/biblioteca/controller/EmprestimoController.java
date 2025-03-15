@@ -6,10 +6,10 @@ import com.example.biblioteca.service.EmprestimoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/*import java.util.List;*/
 
 @RestController
 @RequestMapping("/api/emprestimos")
+
 public class EmprestimoController {
 
     private final EmprestimoService emprestimoService;
@@ -17,12 +17,6 @@ public class EmprestimoController {
     public EmprestimoController(EmprestimoService emprestimoService) {
         this.emprestimoService = emprestimoService;
     }
-
-    /*@GetMapping
-    public ResponseEntity<List<EmprestimoDTO>> listarEmprestimos() {
-        return ResponseEntity.ok(emprestimoService.listarTodos());
-    }*/
-
 
     @GetMapping("/{id}")
     public ResponseEntity<EmprestimoDTO> buscarEmprestimoPorId(@PathVariable Long id) {
