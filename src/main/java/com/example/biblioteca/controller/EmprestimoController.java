@@ -5,7 +5,7 @@ import com.example.biblioteca.dto.EmprestimoDTO;
 import com.example.biblioteca.service.EmprestimoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/emprestimos")
@@ -42,6 +42,12 @@ public class EmprestimoController {
         emprestimoService.deletarEmprestimo(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping
+    public ResponseEntity<List<EmprestimoDTO>> listarEmprestimos() {
+        return ResponseEntity.ok(emprestimoService.listarTodos());
+    }
+
 
 
 }
