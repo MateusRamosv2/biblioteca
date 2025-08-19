@@ -63,7 +63,46 @@ Este comando acima criará um contêiner chamado biblioteca-postgres com o banco
 
 **2. Configurar o Projeto**
 
-As configurações do banco de dados já estão definidas no arquivo src/main/resources/application.properties. Nenhuma alteração é necessária.
+**Configurações de Banco de Dados**
+
+* Essas propriedades são necessárias para que o Spring Boot se conecte e interaja com o seu banco de dados PostgreSQL.
+
+  ```
+     PostgreSQL
+     spring.datasource.url=jdbc:postgresql://localhost:0000/biblioteca_db
+     spring.datasource.username=user
+     spring.datasource.password=password
+     spring.datasource.driver-class-name=org.postgresql.Driver
+
+
+     Configuração JPA e Hibernate
+      spring.jpa.hibernate.ddl-auto=update
+      spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+      spring.jpa.show-sql=true
+      spring.jpa.properties.hibernate.format_sql=true
+  ```
+
+  * spring.datasource.url: O URL de conexão com o banco de dados. No seu caso, localhost (o endereço do contêiner Docker), porta 0000 e o nome do banco biblioteca_db.
+  * spring.datasource.username: O nome de usuário para acessar o banco, que é user (definido no seu docker-compose.yml).
+  * spring.datasource.password: A senha para o usuário, que é password (também do docker-compose.yml).
+  * spring.datasource.driver-class-name: A classe do driver JDBC para o PostgreSQL.
+  * spring.jpa.hibernate.ddl-auto: Esta é uma propriedade importante do Hibernate. O valor update faz com que o Hibernate crie ou atualize automaticamente o esquema do banco de dados (tabelas, colunas, etc.) com     base nas suas classes de entidade (@Entity). É útil para desenvolvimento, mas em produção, o ideal é usar validate ou none para evitar alterações indesejadas.
+  * spring.jpa.show-sql: Se definido como true, o Hibernate exibirá todas as instruções SQL executadas no console, o que é ótimo para depuração.
+  * spring.jpa.properties.hibernate.format_sql: Formata o SQL exibido pelo show-sql, tornando-o mais legível.
+ 
+
+  **Configurações do Servidor**
+
+  Essa propriedade define em qual porta a sua aplicação Spring Boot será executada.
+
+  ```
+     Configuração do servidor:
+      server.port=8080
+  ```
+
+  
+
+
 
 
 **3. Executar a Aplicação**
