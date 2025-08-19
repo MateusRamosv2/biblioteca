@@ -1,0 +1,114 @@
+# 📚 API de Gestão de Biblioteca
+Uma API RESTful para gerenciar usuários, livros e empréstimos de uma biblioteca. O projeto foi reestruturado para ser mais robusto, utilizando DTOs (Data Transfer Objects) para otimizar as 
+requisições, e um sistema de exceções customizado para um controle de erros mais preciso.
+
+## **Funcionalidades**
+* Gerenciamento de Livros: Adicionar, listar, buscar por ID, atualizar e deletar livros.
+
+* Gerenciamento de Usuários: Criar, buscar por ID, listar todos os usuários, atualizar dados e deletá-los (com validação para evitar a exclusão de usuários com empréstimos pendentes).
+
+* Gestão de Empréstimos: Registrar empréstimos de livros a usuários, listar todos os empréstimos, marcar a devolução de um livro e deletar um empréstimo. A API verifica a disponibilidade do livro antes de permitir um novo empréstimo.
+
+* Tratamento de Exceções: A API lança exceções específicas para cenários como "livro não encontrado", "usuário com empréstimos pendentes" ou "empréstimo já devolvido", retornando respostas HTTP claras e informativas.
+
+
+## **Tecnologias**
+O projeto foi construído utilizando as seguintes tecnologias:
+
+* __Linguagem__: Java 17
+
+* **Framework**: Spring Boot 3.4.3
+
+* **Gerenciador de Dependências**: Maven
+
+* **Banco de Dados**: PostgreSQL (executado via Docker)
+
+* **Persistência**: Spring Data JPA e Hibernate
+
+* **Conteinerização**: Docker e Docker Compose
+
+* **Padrão de Projeto**:
+
+    * **Camadas** (Controller, Service, Repository)
+
+    * **DTOs** (Data Transfer Objects) para desacoplar a camada de dados da API.
+
+    * Tratamento de Exceções Customizado para um controle de erros mais eficiente e retornos padronizados.
+
+
+## **Como Executar o Projeto**
+
+Siga os passos abaixo para rodar a aplicação localmente.
+
+**Pré-requisitos:**
+
+Certifique-se de ter os seguintes softwares instalados em sua máquina:
+
+* Java Development Kit (JDK) 17
+
+* Apache Maven
+
+* Docker e Docker Compose
+
+  
+
+
+**1. Iniciar o Banco de Dados**
+
+Utilize o Docker Compose para subir a instância do PostgreSQL:
+docker-compose up -d postgres
+
+Este comando acima criará um contêiner chamado biblioteca-postgres com o banco de dados configurado conforme o arquivo docker-compose.yml.
+
+
+**2. Configurar o Projeto**
+
+As configurações do banco de dados já estão definidas no arquivo src/main/resources/application.properties. Nenhuma alteração é necessária.
+
+
+**3. Executar a Aplicação**
+
+Navegue até o diretório raiz do projeto e execute a aplicação Spring Boot com Maven:
+./mvnw spring-boot:run
+
+**A aplicação estará disponível em http://localhost:8080.**
+
+
+## Endpoints da API
+
+A API expõe os seguintes endpoints, organizados por recurso:
+
+**Usuários (/api/usuarios)**
+
+* POST /: Cria um novo usuário.
+
+* GET /{id}: Busca um usuário por ID.
+
+* DELETE /{id}: Deleta um usuário por ID.
+
+
+**Livros (/api/livros)**
+
+* POST /: Adiciona um novo livro.
+
+* GET /: Lista todos os livros disponíveis.
+
+* GET /{id}: Busca um livro por ID.
+
+* PUT /{id}: Atualiza os dados de um livro.
+
+* DELETE /{id}: Deleta um livro por ID.
+
+
+**Empréstimos (/api/emprestimos)**
+
+* POST /: Realiza um novo empréstimo de livro.
+
+* GET /: Lista todos os empréstimos.
+
+* GET /{id}: Busca um empréstimo por ID.
+
+* PUT /{id}/devolucao: Marca um empréstimo como devolvido.
+
+* DELETE /{id}: Deleta um empréstimo.
+
